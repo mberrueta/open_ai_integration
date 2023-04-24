@@ -1,5 +1,7 @@
+require "fileutils"
 require "pry"
 require_relative "ruby_test_generation"
+require "logger"
 
 module OpenAiIntegration
   class TestGeneration
@@ -15,6 +17,10 @@ module OpenAiIntegration
 
       metadata = define_language(path, content, test_framework)
 
+      logger.info(metadata)
+
+      FileUtils.mkdir_p(metadata.dest_folder) unless Dir.exist?(metadata.dest_folder)
+      File.write(metadata.dest_file, metadata.result, mode: "a")
       metadata
     end
 
@@ -29,6 +35,10 @@ module OpenAiIntegration
       else
         "unknown"
       end
+    end
+
+    def logger
+      @logger ||= Logger.new(STDOUT)
     end
   end
 end

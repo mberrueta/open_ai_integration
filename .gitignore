@@ -65,3 +65,4 @@ build-iPhoneSimulator/
 
 # rspec failure tracking
 .rspec_status
+.envrc.custom

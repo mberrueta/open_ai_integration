@@ -1,5 +1,5 @@
 module OpenAiIntegration
   class TestData
-    attr_accessor :src, :dest, :language, :test_framework
+    attr_accessor :src, :dest_file, :dest_folder, :language, :test_framework, :result
   end
 end
