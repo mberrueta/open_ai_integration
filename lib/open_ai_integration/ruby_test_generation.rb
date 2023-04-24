@@ -8,8 +8,8 @@ module OpenAiIntegration
 
       case data.test_framework
       when :rspec
-        data.dest_file = destination_path(path)
-        data.dest_folder = data.dest_file.gsub("#{File.basename(path, ".*")}_spec.rb", "")
+        data.dest_file = "#{File.basename(path, ".*")}_spec.rb"
+        data.dest_folder = destination_path(path)
         prompt = "Hello ! please as an expert create a test for this code using ruby " \
         'rspec: \n ```\n' + content + '\n```\n'
         result = Http::OpenAiClient.new.completions(prompt)
@@ -37,9 +37,8 @@ module OpenAiIntegration
     end
 
     def destination_path(path)
-      file_name = File.basename(path, ".*")
-      folder = File.path(path).gsub(File.expand_path("."), "").gsub(file_name, "").gsub(".rb", "")
-      "#{folder}#{file_name}_spec.rb"
+      regex = /^\.\/(.*)\/.*\.rb$/
+      "spec/#{File.path(path).match(regex)[1]}"
     end
   end
 end

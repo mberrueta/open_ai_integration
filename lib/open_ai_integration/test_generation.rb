@@ -19,8 +19,14 @@ module OpenAiIntegration
 
       logger.info(metadata)
 
-      FileUtils.mkdir_p(metadata.dest_folder) unless Dir.exist?(metadata.dest_folder)
-      File.write(metadata.dest_file, metadata.result, mode: "a")
+      folder = "#{File.expand_path(".")}/#{metadata.dest_folder}"
+      file = "#{folder}/#{metadata.dest_file}"
+      logger.info("folder: #{folder}, file: #{metadata.dest_file}")
+
+      FileUtils.mkdir_p(folder) unless Dir.exist?(folder)
+      File.write(file, metadata.result, mode: "a")
+
+      pp "File created at: #{file}"
       metadata
     end
 
