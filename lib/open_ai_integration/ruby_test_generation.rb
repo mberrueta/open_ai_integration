@@ -37,7 +37,7 @@ module OpenAiIntegration
     end
 
     def destination_path(path)
-      regex = /^\.\/(.*)\/.*\.rb$/
+      regex = /^\.*\/*(.*)\/.*\.rb$/
       "./spec/#{File.path(path).match(regex)[1]}"
     end
   end

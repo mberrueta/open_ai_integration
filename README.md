@@ -62,8 +62,8 @@ Lets create one for show only, now the magic
 
 ```sh
 # First we need the env var setup
-cp $PATH_TO_OPEN_AI_INT/.envrc .
-cp $PATH_TO_OPEN_AI_INT/.envrc.custom . # <- WARNING !!! DON'T COMMIT THIS FILE, HAS THE API_KEY
+source $PATH_TO_OPEN_AI_INT/.envrc
+source $PATH_TO_OPEN_AI_INT/.envrc.custom
 git status
 
 direnv allow
@@ -71,4 +71,15 @@ ruby $PATH_TO_OPEN_AI_INT/generate_test.rb -p ./lib/simple_test_web/live/user_li
 
 cat ./test/lib/simple_test_web/live/user_live/show_test.exs
 # cool ne?
+```
+
+## Ambitious
+
+Too lazy to run one by one?
+
+```sh
+cd your_real_project
+git checkout -b test_for_free
+
+find lib/your_real_project_web/live -name "*.ex" | xargs -n1 ruby $PATH_TO_OPEN_AI_INT/generate_test.rb -p
 ```
