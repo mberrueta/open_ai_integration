@@ -6,7 +6,7 @@ RSpec.describe OpenAiIntegration::TestGeneration, "#generate_test for ruby" do
   before do
     @options = {
       api_key: "sk-1234567890",
-      path: File.absolute_path("./spec/samples/hello_world.rb"),
+      path: File.path("./spec/samples/hello_world.rb"),
       test_framework: :rspec,
     }
 
@@ -47,8 +47,8 @@ end"
     result = subject.generate_test(@options)
 
     expect(result.language).to eq(:ruby)
-    expect(result.dest_file).to eq("/spec/samples/hello_world_spec.rb")
-    expect(result.dest_folder).to eq("/spec/samples/")
+    expect(result.dest_file).to eq("hello_world_spec.rb")
+    expect(result.dest_folder).to eq("./spec/spec/samples")
     expect(result.test_framework).to eq(:rspec)
     expect(result.result).to eq(expected_result)
   end

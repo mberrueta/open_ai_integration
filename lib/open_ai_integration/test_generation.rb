@@ -1,6 +1,7 @@
 require "fileutils"
 require "pry"
 require_relative "ruby_test_generation"
+require_relative "elixir_test_generation"
 require "logger"
 
 module OpenAiIntegration
@@ -37,7 +38,7 @@ module OpenAiIntegration
       when ".rb"
         RubyTestGeneration.new.generate(path, content, test_framework)
       when ".ex"
-        data[:language] = :elixir
+        ElixirTestGeneration.new.generate(path, content)
       else
         "unknown"
       end
